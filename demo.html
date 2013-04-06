@@ -1,0 +1,32 @@
+<html>
+<head>
+<script src="MagicWorker.js"></script>
+<script src="demo-worker.js"></script>
+<script>
+
+var go = function() {
+
+  var worker = new MagicWorker.Worker('demo-worker.js', workerCode);
+
+  worker.addEventListener('message', function(e) {
+    document.getElementById("result").innerHTML += e.data + "\n";
+  }, false);
+
+  var max = document.getElementById("max").value;
+  worker.postMessage(max); // Send data to our worker.  
+}
+
+</script>
+</head>
+<body>
+
+<center>
+Find the number of primes under: 
+<input id="max" value="1000"></input>
+<button id="go" onclick="go();" autofocus>Go!</button>
+<br><br>
+<textarea id="result" style="width: 50%; height: 50%;"></textarea>
+</center>
+
+</body>
+</html>
