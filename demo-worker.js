@@ -1,4 +1,6 @@
-var workerCode = function() {
+(function(f) {if (typeof MagicWorker !== "undefined") {
+    MagicWorker.register("demo-worker.js", f);
+} else {f()}})(function() {
   this.addEventListener('message', function(e) {
 
     var max = e.data;
@@ -32,4 +34,4 @@ var workerCode = function() {
 
     return total;
   }
-}; if (typeof importScripts === 'function') {workerCode();}
+});

@@ -16,21 +16,27 @@ Chrome is wonderfully fast at some things, so it would be great if we could test
 
 - 1) Add `MagicWorker.js` to your project.
 - 2) Include `MagicWorker.js` and all your web worker files in your webpage using a normal script tag.
-- 3) Modify each web worker script by prepending the line:
+- 3) Modify each web worker script by prepending the lines:
 
-        var workerCode = function() {
+        (function(f) {if (typeof MagicWorker !== "undefined") {
+            MagicWorker.register("demo-worker.js", f);
+        } else {f()}})(function() {
 
 and appending the line:
 
-        }; if (typeof importScripts === 'function') {workerCode();}
+        });
 
-If there is more than one script, change `workerCode` to a different variable name for each.
+Change `"demo-worker.js"` to the name of the script file.
 
-- 4) Modify the relevant calls from `new Worker("file.js")` to `new MagicWorker("file.js", workerCode)` (replace `workerCode` with the function name from step 3).
+- 4) Modify the relevant calls from `new Worker("file.js")` to `new MagicWorker("file.js")`. Alternatively (instead), for maximum magic add the following line right after running `MagicWorker.js`:
+
+        window.Worker = MagicWorker;
 
 ## Caveats
 
 - Currently, each web worker code file must be self-contained. Any `importScripts` calls must be replaced with actual code if you want them to work offline. It might be reasonable to combine multiple web worker source files into one, which allows the code to interact by living in the same wrapper.
+
+- The boilerplate that 
 
 - You'll get a `Resource interpreted as Script but transferred with MIME type text/plain: "blob:null/********-****-****-****-************". ` warning for every web worker loaded using a string.
 
