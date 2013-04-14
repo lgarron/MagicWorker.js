@@ -1,0 +1,1 @@
+../../MagicWorker.js

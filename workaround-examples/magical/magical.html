@@ -1,0 +1,7 @@
+<script src="MagicWorker.js"></script>
+<script src="worker-magical.js"></script>
+<script>
+  var worker = new Worker("worker-magical.js");
+  worker.addEventListener("message", function(e) {document.write(e.data)}, false);
+  worker.postMessage("Hi!");
+</script>

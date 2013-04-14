@@ -1,0 +1,14 @@
+<script>
+  try {
+    var worker = new Worker("worker-two-sources.js");
+  }
+  catch (e) {
+    var workerSource = "this.addEventListener(\"message\", function(e) {\n  this.postMessage(\"Hello! You sent: \" + e.data);\n}, false);";
+    var blob = new Blob([workerSource]);
+    var url = window.URL.createObjectURL(blob);
+    var worker = new Worker(url);
+  }
+
+  worker.addEventListener("message", function(e) {document.write(e.data)}, false);
+  worker.postMessage("Hi!");
+</script>

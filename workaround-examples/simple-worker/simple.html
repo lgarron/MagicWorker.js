@@ -1,0 +1,5 @@
+<script>
+  var worker = new Worker("worker-simple.js");
+  worker.addEventListener("message", function(e) {document.write(e.data)}, false);
+  worker.postMessage("Hi!");
+</script>

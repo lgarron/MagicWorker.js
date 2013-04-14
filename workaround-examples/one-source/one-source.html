@@ -1,0 +1,17 @@
+<script src="one-source-worker.js"></script>
+<script>
+  try {
+    var worker = new Worker("worker-one-source.js");
+  }
+  catch (e) {
+    var src = workerCode.toString();
+    // Remove the outer "function(){" and "}" parts of the source:
+    src = src.slice(0, src.lastIndexOf("}")).substring(src.indexOf("{") + 1);
+    var blob = new Blob([src]);
+    var url = window.URL.createObjectURL(blob);
+    var worker = new Worker(url);
+  }
+
+  worker.addEventListener("message", function(e) {document.write(e.data)}, false);
+  worker.postMessage("Hi!");
+</script>
