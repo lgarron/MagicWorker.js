@@ -15,32 +15,32 @@ Chrome is wonderfully fast at some things, so it would be great if we could test
 ## Usage
 
 - 1) Add `MagicWorker.js` to your project.
-- 2) Include `MagicWorker.js` and all your web worker files in your webpage using a normal script tag.
-- 3) Modify each web worker script by prepending the lines:
+- 2) Include `MagicWorker.js` in your webpage using a normal script tag, followed by each of your web worker files:
+
+        <script src="MagicWorker.js"></script>
+        <script src="change-this-to-your-worker-file-name.js"></script>
+
+- 3) Modify each web worker file by prepending the lines:
 
         (function(f) {if (typeof MagicWorker !== "undefined") {
-            MagicWorker.register("demo-worker.js", f);
+            MagicWorker.register("change-this-to-your-worker-file-name.js", f);
         } else {f()}})(function() {
 
 and appending the line:
 
         });
 
-Change `"demo-worker.js"` to the name of the script file.
-
-- 4) Modify the relevant calls from `new Worker("file.js")` to `new MagicWorker("file.js")`. Alternatively (instead), for maximum magic add the following line right after running `MagicWorker.js`:
-
-        window.Worker = MagicWorker;
+(Change `"change-this-to-your-worker-file-name.js"` to the name of the file.)
 
 ## Caveats
 
 - Currently, each web worker code file must be self-contained. Any `importScripts` calls must be replaced with actual code if you want them to work offline. It might be reasonable to combine multiple web worker source files into one, which allows the code to interact by living in the same wrapper.
 
-- The boilerplate that 
-
 - You'll get a `Resource interpreted as Script but transferred with MIME type text/plain: "blob:null/********-****-****-****-************". ` warning for every web worker loaded using a string.
 
 - Not tested in Internet Explorer. Chrome, Firefox, Safari, and Opera all work (although the workaround is mainly for Chrome).
+
+- By default, the window's `Worker` object is replaced with the new `MagicWorker` wrapper. If you'd like to be able oo use the original `Worker` object, remove the last line of `MagicWorker.js`, and replace only your desired calls to `new Worker(...)` with `new MagicWorker(...)`.
 
 ## How does it work?
 

@@ -13,9 +13,7 @@ var MagicWorker = (function() {
     return worker;
   };
 
-  // var workerWrapper = Worker;
-
-  var MagicWorker = function (filename, workerCode) {
+  var MagicWorker = function (filename) {
     try {
       return new originalWorker(filename);
     }
@@ -39,10 +37,11 @@ var MagicWorker = (function() {
     }
   };
 
-
   MagicWorker.register = function(filename, fn) {
     fileFunctions[filename] = fn;
   };
 
   return MagicWorker;
 })();
+
+window.Worker = MagicWorker;
