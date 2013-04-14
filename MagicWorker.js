@@ -23,8 +23,6 @@ var MagicWorker = (function() {
     }
   };
 
-  return {
-    Worker: Worker
-  };
+  return Worker;
 })();
 

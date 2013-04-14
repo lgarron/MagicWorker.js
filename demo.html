@@ -6,7 +6,7 @@
 
 var go = function() {
 
-  var worker = new MagicWorker.Worker('demo-worker.js', workerCode);
+  var worker = new MagicWorker('demo-worker.js', workerCode);
 
   worker.addEventListener('message', function(e) {
     document.getElementById("result").innerHTML += e.data + "\n";

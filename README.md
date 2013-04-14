@@ -26,7 +26,7 @@ and appending the line:
 
 If there is more than one script, change `workerCode` to a different variable name for each.
 
-- 4) Modify the relevant calls from `new Worker("file.js")` to `new MagicWorker.Worker("file.js", workerCode)` (replace `workerCode` with the function name from step 3).
+- 4) Modify the relevant calls from `new Worker("file.js")` to `new MagicWorker("file.js", workerCode)` (replace `workerCode` with the function name from step 3).
 
 ## Caveats
 
