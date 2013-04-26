@@ -41,7 +41,7 @@ var MagicWorker = (function() {
     fileFunctions[filename] = fn;
   };
 
-  MagicWorker.prototype = new originalWorker();
+  MagicWorker.prototype = originalWorker.prototype;
 
   return MagicWorker;
 })();
