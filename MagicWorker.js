@@ -6,7 +6,7 @@ var MagicWorker = (function() {
   var originalWorker = window.Worker;
 
   var inlineWorker = function(workerCode) {
-    var blob = new Blob([workerCode]);
+    var blob = new Blob([workerCode], {type: "text/javascript"});
     var workerURL = window.URL.createObjectURL(blob);
     var worker = new originalWorker(workerURL);
     setTimeout(function () { window.URL.revokeObjectURL(workerURL); }, 1000);

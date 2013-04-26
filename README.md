@@ -36,8 +36,6 @@ and appending the line:
 
 - Currently, each web worker code file must be self-contained. Any `importScripts` calls must be replaced with actual code if you want them to work offline. It might be reasonable to combine multiple web worker source files into one, which allows the code to interact by living in the same wrapper.
 
-- You'll get a `Resource interpreted as Script but transferred with MIME type text/plain: "blob:null/********-****-****-****-************". ` warning for every web worker loaded using a string.
-
 - Not tested in Internet Explorer. Chrome, Firefox, Safari, and Opera all work (although the workaround is mainly for Chrome).
 
 - By default, the window's `Worker` object is replaced with the new `MagicWorker` wrapper. If you'd like to be able oo use the original `Worker` object, remove the last line of `MagicWorker.js`, and replace only your desired calls to `new Worker(...)` with `new MagicWorker(...)`.
