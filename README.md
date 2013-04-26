@@ -38,7 +38,7 @@ and appending the line:
 
 - Not tested in Internet Explorer. Chrome, Firefox, Safari, and Opera all work (although the workaround is mainly for Chrome).
 
-- By default, the window's `Worker` object is replaced with the new `MagicWorker` wrapper. If you'd like to be able oo use the original `Worker` object, remove the last line of `MagicWorker.js`, and replace only your desired calls to `new Worker(...)` with `new MagicWorker(...)`.
+- By default, the window's `Worker` object is replaced with the new `MagicWorker` wrapper. If you'd like to be able to use the original `Worker` object, remove the last line of `MagicWorker.js`, and replace only your desired calls to `new Worker(...)` with `new MagicWorker(...)`.
 
 ## How does it work?
 
