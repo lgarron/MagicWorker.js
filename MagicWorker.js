@@ -23,12 +23,12 @@ var MagicWorker = (function() {
         if (typeof workerCode === "undefined") {
           workerCode = fileFunctions[filename];
           if (typeof workerCode === "undefined") {
-            throw "MagiWorker: Filename \"" + filename + "\" is not registered.";
+            throw "MagicWorker: Filename \"" + filename + "\" is not registered.";
           }
         }
         var src = workerCode.toString();
         src = src.slice(0, src.lastIndexOf("}")).substring(src.indexOf("{") + 1);
-      
+
         return inlineWorker(src);
       }
       else {
@@ -38,6 +38,9 @@ var MagicWorker = (function() {
   };
 
   MagicWorker.register = function(filename, fn) {
+    if (typeof fileFunctions[filename] !== "undefined") {
+      console.warn("MagicWorker: [WARNING] Multiple files were registered with the file name \"" + filename + "\". Make sure you register each script using its filename.");
+    }
     fileFunctions[filename] = fn;
   };
 
